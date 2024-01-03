@@ -17,7 +17,7 @@ func DebugWindow(p *gui.Node) {
 	bugWin.StandardClose()
 	bugTab = DebugWindow2(bugWin, "Debug Tab")
 	bugTab.StandardClose()
-	if gui.ArgDebug() {
+	if ArgDebug() {
 		log.SetTmp()
 	}
 }
@@ -33,15 +33,6 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 
 //////////////////////// main debug things //////////////////////////////////
 	gog = newB.NewGroup("Debugging Windows:")
-
-	// generally useful debugging
-	cb := gog.NewCheckbox("Seperate windows")
-	cb.Custom = func() {
-		log.Log(BUG, "Custom() n.widget =", cb.Name, cb.B)
-		n.SetTabs(cb.B)
-	}
-	cb.Set(false)
-	n.SetTabs(false)
 
 	gog.NewButton("logging", func () {
 		DebugFlags(myGui)

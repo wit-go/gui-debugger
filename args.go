@@ -17,6 +17,11 @@ type ArgsDebugger struct {
 	Debugger bool `arg:"--debugger" help:"open the debugger window"`
 }
 
+// returns true if --gui-debug was passed from the command line
+func ArgDebug() bool {
+	return argDebugger.Debugger
+}
+
 func init() {
 	arg.Register(&argDebugger)
 
