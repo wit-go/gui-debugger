@@ -7,13 +7,6 @@ import 	(
 	"go.wit.com/gui/gui"
 )
 
-// main debugging window
-var myGui *gui.Node
-var bugWin *gui.Node
-var bugTab *gui.Node
-
-var mapWindows map[string]*gui.Node // tracks all windows that exist
-
 /*
 	Creates a window helpful for debugging this package
 */
@@ -26,7 +19,6 @@ func DebugWindow(p *gui.Node) {
 	bugTab.StandardClose()
 	if gui.ArgDebug() {
 		log.SetTmp()
-		// myGui.DebugFlags()
 	}
 }
 
@@ -52,7 +44,7 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 	n.SetTabs(false)
 
 	gog.NewButton("logging", func () {
-		bugWin.DebugFlags()
+		DebugFlags(myGui)
 	})
 	gog.NewButton("Debug Widgets", func () {
 		gui.DebugWidgetWindow(myGui)

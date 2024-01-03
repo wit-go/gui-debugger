@@ -5,6 +5,12 @@ import (
 	// "go.wit.com/gui/gui/toolkit"
 )
 
+// main debugging window
+var myGui *gui.Node
+var bugWin *gui.Node
+var bugTab *gui.Node
+
+var mapWindows map[string]*gui.Node // tracks all windows that exist
 
 // global var for checking to see if this
 // window/tab for debugging a widget exists
