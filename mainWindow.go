@@ -47,7 +47,7 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 		DebugFlags(myGui)
 	})
 	gog.NewButton("Debug Widgets", func () {
-		gui.DebugWidgetWindow(myGui)
+		DebugWidgetWindow(myGui)
 	})
 	gog.NewButton("GO Language Internals", func () {
 		DebugGolangWindow(bugWin)
