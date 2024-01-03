@@ -50,10 +50,10 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 		gui.DebugWidgetWindow(myGui)
 	})
 	gog.NewButton("GO Language Internals", func () {
-		bugWin.DebugGolangWindow()
+		DebugGolangWindow(bugWin)
 	})
 	gog.NewButton("GO Channels debug", func () {
-		bugWin.DebugGoChannels()
+		DebugGoChannels(bugWin)
 	})
 
 	gog.NewLabel("Force Quit:")
