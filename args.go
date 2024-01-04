@@ -4,7 +4,7 @@ package debugger
 
 import (
 	arg "github.com/alexflint/go-arg"
-	log "go.wit.com/log"
+	"go.wit.com/log"
 )
 
 var INFO log.LogFlag

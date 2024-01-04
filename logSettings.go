@@ -21,7 +21,8 @@ type LogSettings struct {
 }
 
 func (ls *LogSettings) Set(b bool) {
-	log.Set(ls.name, b)
+	// log.Set(ls.name, b)
+	log.Warn("log.Set() FIXME: not working here anymore")
 	ls.checkbox.Set(b)
 }
 
@@ -33,9 +34,10 @@ func NewLogFlag(p *gui.Node, name string) *LogSettings {
 
 	ls.checkbox = p.NewCheckbox(name)
 	ls.label = p.NewLabel("Enable log." + name)
-	ls.checkbox.Set(log.Get(name))
+	// ls.checkbox.Set(log.Get(name))
 	ls.checkbox.Custom = func() {
-		log.Set(name, ls.checkbox.B)
+		// log.Set(name, ls.checkbox.B)
+		log.Warn("log.Set() FIXME: not working here anymore")
 	}
 	return ls
 }
@@ -89,8 +91,10 @@ func DebugFlags(n *gui.Node) {
 	g = newB.NewGroup("List")
 	g = g.NewGrid("flags grid", 2, 2)
 
+	/*
 	logGadgets["INFO"] = NewLogFlag(g, "INFO")
 	logGadgets["WARN"] = NewLogFlag(g, "WARN")
 	logGadgets["SPEW"] = NewLogFlag(g, "SPEW")
 	logGadgets["ERROR"] = NewLogFlag(g, "ERROR")
+	*/
 }
