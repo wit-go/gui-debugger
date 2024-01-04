@@ -5,6 +5,7 @@ import 	(
 
 	"go.wit.com/log"
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets/logsettings"
 )
 
 /*
@@ -17,6 +18,8 @@ func DebugWindow(p *gui.Node) {
 	bugWin.StandardClose()
 	bugTab = DebugWindow2(bugWin, "Debug Tab")
 	bugTab.StandardClose()
+	// initialize the log settings window (does not display it)
+	myLS = logsettings.New(myGui)
 	if ArgDebug() {
 		log.SetTmp()
 	}
@@ -35,7 +38,7 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 	gr = newB.NewGroup("Debugging Windows:")
 
 	gr.NewButton("logging", func () {
-		DebugFlags(myGui)
+		myLS.Show()
 	})
 	gr.NewButton("Debug Widgets", func () {
 		DebugWidgetWindow(myGui)

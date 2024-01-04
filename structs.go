@@ -2,13 +2,15 @@ package debugger
 
 import (
 	"go.wit.com/gui/gui"
-	// "go.wit.com/gui/gui/toolkit"
+	"go.wit.com/gui/gadgets/logsettings"
 )
 
 // main debugging window
 var myGui *gui.Node
 var bugWin *gui.Node
 var bugTab *gui.Node
+
+var myLS *logsettings.LogSettings
 
 var mapWindows map[string]*gui.Node // tracks all windows that exist
 
