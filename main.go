@@ -15,6 +15,8 @@ import 	(
 
 func DebugWindow(p *gui.Node) {
 	if (me != nil) {
+		log.Warn("Draw then Toggle() debuging window here")
+		me.bugWin.Draw()
 		me.bugWin.Toggle()
 		return
 	}
@@ -22,11 +24,11 @@ func DebugWindow(p *gui.Node) {
 	me.myGui = p
 
 	me.bugWin = gadgets.NewBasicWindow(p,"go.wit.com/gui debug window")
-
 	DebugWindow2(me.bugWin.Box(), "Debug Tab")
-	// initialize the log settings window (does not display it)
 
+	// initialize the log settings window (does not display it)
 	me.myLS = logsettings.New(me.myGui)
+
 	if ArgDebug() {
 		log.SetTmp()
 	}
