@@ -16,7 +16,6 @@ import 	(
 func DebugWindow(p *gui.Node) {
 	if (me != nil) {
 		log.Warn("Draw then Toggle() debuging window here")
-		me.bugWin.Draw()
 		me.bugWin.Toggle()
 		return
 	}
@@ -24,6 +23,7 @@ func DebugWindow(p *gui.Node) {
 	me.myGui = p
 
 	me.bugWin = gadgets.NewBasicWindow(p,"go.wit.com/gui debug window")
+	me.bugWin.Draw()
 	DebugWindow2(me.bugWin.Box(), "Debug Tab")
 
 	// initialize the log settings window (does not display it)
@@ -46,7 +46,6 @@ func DebugWindow2(newB *gui.Node, title string) *gui.Node {
 	gr.NewButton("Widgets Window", func () {
 		if me.widgets == nil {
 			me.widgets = DebugWidgetWindow(me.myGui)
-			me.widgets.Draw()
 			return
 		}
 		me.widgets.Toggle()
@@ -108,9 +107,9 @@ func DebugWindow2(newB *gui.Node, title string) *gui.Node {
 	gr.NewButton("GO Language Internals", func () {
 		if me.golang == nil {
 			me.golang = DebugGolangWindow(me.myGui)
-			me.golang.Draw()
 			return
 		}
+		log.Warn("going to toggle golang window")
 		if me.golang.Ready() {
 			me.golang.Toggle()
 		}
@@ -118,9 +117,9 @@ func DebugWindow2(newB *gui.Node, title string) *gui.Node {
 	gr.NewButton("GO Channels debug", func () {
 		if me.gochan == nil {
 			me.gochan = DebugGoChannels(me.myGui)
-			me.gochan.Draw()
 			return
 		}
+		log.Warn("going to toggle go channels window")
 		if me.gochan.Ready() {
 			me.gochan.Toggle()
 		}

@@ -33,6 +33,7 @@ func setActiveWidget(w *gui.Node) {
 func DebugWidgetWindow(p *gui.Node) *gadgets.BasicWindow {
 	var w *gadgets.BasicWindow
 	w = gadgets.NewBasicWindow(p, "Widgets")
+	w.Draw()
 
 	g := w.Box().NewGroup("widget:").Pad()
 

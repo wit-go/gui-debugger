@@ -20,6 +20,7 @@ func DebugGoChannels(p *gui.Node) *gadgets.BasicWindow {
 	var g *gui.Node
 
 	w = gadgets.NewBasicWindow(p, "Debug GO Channels")
+	w.Draw()
 	g = w.Box().NewGroup("Channel stuff").Pad()
 
 	// var debugWG sync.WaitGroup

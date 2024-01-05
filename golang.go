@@ -18,6 +18,7 @@ func DebugGolangWindow(p *gui.Node) *gadgets.BasicWindow {
 	var g, og, outputTextbox *gui.Node
 
 	w = gadgets.NewBasicWindow(p, "GO")
+	w.Draw()
 	g = w.Box().NewGroup("Language Internals").Pad()
 
 	g.NewButton("ReadModuleInfo()", func () {
