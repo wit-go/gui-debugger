@@ -2,17 +2,35 @@ package debugger
 
 import (
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets"
 	"go.wit.com/gui/gadgets/logsettings"
 )
 
-// main debugging window
-var myGui *gui.Node
+var me *debuggerSettings
+
+type debuggerSettings struct {
+	ready	bool
+	hidden	bool
+	err	error
+
+	myGui *gui.Node
+
+	bugWin *gadgets.BasicWindow
+	widgets *gadgets.BasicWindow
+	golang *gadgets.BasicWindow
+	gochan *gadgets.BasicWindow
+
+	myLS *logsettings.LogSettings
+
+	mapWindows map[string]*gui.Node // tracks all windows that exist
+}
+
 var bugWin *gui.Node
+/*
+// main debugging window
 var bugTab *gui.Node
-
-var myLS *logsettings.LogSettings
-
-var mapWindows map[string]*gui.Node // tracks all windows that exist
+var myGui *gui.Node
+*/
 
 // global var for checking to see if this
 // window/tab for debugging a widget exists

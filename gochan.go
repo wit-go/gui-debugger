@@ -9,18 +9,18 @@ import (
 
 	"go.wit.com/log"
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets"
 )
 
 var debugWG *sync.WaitGroup
 var debugNumberChan chan int
 
-func DebugGoChannels(n *gui.Node) {
-	var w, g *gui.Node
+func DebugGoChannels(p *gui.Node) *gadgets.BasicWindow {
+	var w *gadgets.BasicWindow
+	var g *gui.Node
 
-	w = n.NewWindow("Debug GO Channels")
-	w.Custom = w.StandardClose
-
-	g = w.NewGroup("Channel stuff")
+	w = gadgets.NewBasicWindow(p, "Debug GO Channels")
+	g = w.Box().NewGroup("Channel stuff").Pad()
 
 	// var debugWG sync.WaitGroup
 	g.NewButton("init()", func () {
@@ -63,7 +63,9 @@ func DebugGoChannels(n *gui.Node) {
 	g.NewButton("print", func () {
 		log.Log(true, "waitgroup counter is ?")
 	})
+	return w
 }
+
 func sendNumber(i int) {
 	log.Log(true, "START debugNumberChan <-", i, "  (sending", i, "to channel)")
 	debugNumberChan <- i

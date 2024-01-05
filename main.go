@@ -5,6 +5,7 @@ import 	(
 
 	"go.wit.com/log"
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets"
 	"go.wit.com/gui/gadgets/logsettings"
 )
 
@@ -13,35 +14,40 @@ import 	(
 */
 
 func DebugWindow(p *gui.Node) {
-	myGui = p
-	bugWin = myGui.NewWindow("go.wit.com/gui debug window")
-	bugWin.StandardClose()
-	bugTab = DebugWindow2(bugWin, "Debug Tab")
-	bugTab.StandardClose()
+	if (me != nil) {
+		me.bugWin.Toggle()
+		return
+	}
+	me = new(debuggerSettings)
+	me.myGui = p
+
+	me.bugWin = gadgets.NewBasicWindow(p,"go.wit.com/gui debug window")
+
+	DebugWindow2(me.bugWin.Box(), "Debug Tab")
 	// initialize the log settings window (does not display it)
-	myLS = logsettings.New(myGui)
+
+	me.myLS = logsettings.New(me.myGui)
 	if ArgDebug() {
 		log.SetTmp()
 	}
 }
 
-func DebugWindow2(n *gui.Node, title string) *gui.Node {
-	var newW, newB, gr *gui.Node
-	// var logSettings *gadgets.LogSettings
-
-	// time.Sleep(1 * time.Second)
-	newW = n.NewWindow(title)
-
-	newB = newW.NewBox("hBox", true)
+func DebugWindow2(newB *gui.Node, title string) *gui.Node {
+	var gr *gui.Node
 
 //////////////////////// main debug things //////////////////////////////////
 	gr = newB.NewGroup("Debugging Windows:")
 
 	gr.NewButton("logging", func () {
-		myLS.Show()
+		me.myLS.Toggle()
 	})
-	gr.NewButton("Debug Widgets", func () {
-		DebugWidgetWindow(myGui)
+	gr.NewButton("Widgets Window", func () {
+		if me.widgets == nil {
+			me.widgets = DebugWidgetWindow(me.myGui)
+			me.widgets.Draw()
+			return
+		}
+		me.widgets.Toggle()
 	})
 
 	gr.NewLabel("Force Quit:")
@@ -98,10 +104,24 @@ func DebugWindow2(n *gui.Node, title string) *gui.Node {
 	gr = newB.NewGroup("Learn GO")
 
 	gr.NewButton("GO Language Internals", func () {
-		DebugGolangWindow(myGui)
+		if me.golang == nil {
+			me.golang = DebugGolangWindow(me.myGui)
+			me.golang.Draw()
+			return
+		}
+		if me.golang.Ready() {
+			me.golang.Toggle()
+		}
 	})
 	gr.NewButton("GO Channels debug", func () {
-		DebugGoChannels(myGui)
+		if me.gochan == nil {
+			me.gochan = DebugGoChannels(me.myGui)
+			me.gochan.Draw()
+			return
+		}
+		if me.gochan.Ready() {
+			me.gochan.Toggle()
+		}
 	})
 
 	return newB
@@ -169,4 +189,5 @@ func dropdownWindowWidgets(p *gui.Node) {
 }
 
 func setActiveWidget(w *gui.Node) {
+	log.Warn("TODO: setActiveWidget()")
 }

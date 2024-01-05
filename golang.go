@@ -10,16 +10,15 @@ import (
 
 	"go.wit.com/log"
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets"
 )
 
-func DebugGolangWindow(n *gui.Node) {
-	var newW, newB, g, og, outputTextbox *gui.Node
+func DebugGolangWindow(p *gui.Node) *gadgets.BasicWindow {
+	var w *gadgets.BasicWindow
+	var g, og, outputTextbox *gui.Node
 
-	newW = n.NewWindow("GO")
-	newW.Custom = newW.StandardClose
-	newB = newW.NewBox("hBox", true)
-
-	g = newB.NewGroup("Language Internals")
+	w = gadgets.NewBasicWindow(p, "GO")
+	g = w.Box().NewGroup("Language Internals").Pad()
 
 	g.NewButton("ReadModuleInfo()", func () {
 		tmp, _ := debug.ReadBuildInfo()
@@ -91,7 +90,7 @@ func DebugGolangWindow(n *gui.Node) {
 		panic("test")
 	})
 
-	g = newB.NewGroup("TODO: finish these")
+	g = w.Box().NewGroup("TODO: finish these").Pad()
 
 	// g.NewLabel("TODO:")
 
@@ -122,11 +121,13 @@ func DebugGolangWindow(n *gui.Node) {
 		outputTextbox.SetText(dumpModuleInfo())
 	})
 
-	og = newB.NewGroup("output")
+	og = w.Box().NewGroup("output").Pad()
 	outputTextbox = og.NewTextbox("outputBox")
 	outputTextbox.Custom = func () {
 		log.Log(true, "custom TextBox() for golang output a =", outputTextbox.S)
 	}
+
+	return w
 }
 
 func runtimeReadMemStats() string {

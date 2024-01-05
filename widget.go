@@ -6,6 +6,7 @@ import (
 
 	"go.wit.com/log"
 	"go.wit.com/gui/gui"
+	"go.wit.com/gui/gadgets"
 )
 
 
@@ -29,20 +30,11 @@ func setActiveWidget(w *gui.Node) {
 }
 */
 
-func DebugWidgetWindow(w *gui.Node) {
-	var newW, newB *gui.Node
-	if (bugWidget != nil) {
-		// this window was already created. Just change the widget we are working against
-		setActiveWidget(w)
-		return
-	}
+func DebugWidgetWindow(p *gui.Node) *gadgets.BasicWindow {
+	var w *gadgets.BasicWindow
+	w = gadgets.NewBasicWindow(p, "Widgets")
 
-	newW = w.NewWindow("Widgets")
-	newW.Custom = newW.StandardClose
-	bugWidget = newW
-	newB = newW.NewBox("hBox", true)
-
-	g := newB.NewGroup("widget:")
+	g := w.Box().NewGroup("widget:").Pad()
 
 	g2 := g.NewGroup("widget:")
 	activeLabel = g2.NewLabel("undef")
@@ -67,7 +59,7 @@ func DebugWidgetWindow(w *gui.Node) {
 
 
 	// common things that should work against each widget
-	g = newB.NewGroup("common things")
+	g = w.Box().NewGroup("common things")
 	g.NewButton("Enable()", func () {
 		activeWidget.Enable()
 	})
@@ -84,12 +76,12 @@ func DebugWidgetWindow(w *gui.Node) {
 		activeWidget.Dump()
 	})
 
-	g = newB.NewGroup("add things")
+	g = w.Box().NewGroup("add things")
 	debugAddWidgetButton(g)
 	g.NewLabel("experiments:")
 	debugAddWidgetButtons(g)
 
-	g = newB.NewGroup("change things")
+	g = w.Box().NewGroup("change things")
 	g.NewButton("AddText()", func () {
 		activeWidget.AddText(activeLabelNewName.S)
 		/*
@@ -129,13 +121,15 @@ func DebugWidgetWindow(w *gui.Node) {
 		activeWidget.Delete(activeWidget)
 	})
 
-	g = newB.NewGroup("not working?")
-	activeJunk = newB.NewGroup("junk:")
+	g = w.Box().NewGroup("not working?")
+	activeJunk = w.Box().NewGroup("junk:")
 	activeJunk.NewLabel("test junk")
 
 	if (activeWidget == nil) {
-		setActiveWidget(myGui)
+		setActiveWidget(me.myGui)
 	}
+
+	return w
 }
 
 func debugAddWidgetButtons(n *gui.Node) {
