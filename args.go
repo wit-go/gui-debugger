@@ -3,7 +3,7 @@ package debugger
 // initializes logging and command line options
 
 import (
-	arg "github.com/alexflint/go-arg"
+	"go.wit.com/arg"
 	"go.wit.com/log"
 )
 
