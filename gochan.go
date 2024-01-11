@@ -26,10 +26,10 @@ func DebugGoChannels(p *gui.Node) *gadgets.BasicWindow {
 	// var debugWG sync.WaitGroup
 	g.NewButton("init()", func () {
 		if (debugNumberChan == nil) {
-			log.Log(true, "making debugNumberChan channel")
+			log.Log(CHAN, "making debugNumberChan channel")
 			debugNumberChan = make(chan int)
 		} else {
-			log.Log(true, "debugNumberChan already made")
+			log.Log(CHAN, "debugNumberChan already made")
 		}
 		debugWG = new(sync.WaitGroup)
 	})
@@ -50,34 +50,34 @@ func DebugGoChannels(p *gui.Node) *gadgets.BasicWindow {
 		go sendNumber(7)
 	})
 	g.NewButton("send 4 numbers (chan <- int)", func () {
-		log.Log(true, "generateNumbers(4)")
+		log.Log(CHAN, "generateNumbers(4)")
 		go generateNumbers(4)
 	})
 	g.NewButton("debugWG.Done()", func () {
-		log.Log(true, "ran debugWG.Done()")
+		log.Log(CHAN, "ran debugWG.Done()")
 		debugWG.Done()
 	})
 	g.NewButton("close chan", func () {
-		log.Log(true, "close() on", debugNumberChan)
+		log.Log(CHAN, "close() on", debugNumberChan)
 		close(debugNumberChan)
 	})
 	g.NewButton("print", func () {
-		log.Log(true, "waitgroup counter is ?")
+		log.Log(CHAN, "waitgroup counter is ?")
 	})
 	return w
 }
 
 func sendNumber(i int) {
-	log.Log(true, "START debugNumberChan <-", i, "  (sending", i, "to channel)")
+	log.Log(CHAN, "START debugNumberChan <-", i, "  (sending", i, "to channel)")
 	debugNumberChan <- i
 	debugWG.Wait()
-	log.Log(true, "END   debugNumberChan sendNumber() done", i)
+	log.Log(CHAN, "END   debugNumberChan sendNumber() done", i)
 }
 
 func generateNumbers(total int) {
 	fmt.Printf("START generateNumbers()\n")
 	for idx := 1; idx <= total; idx++ {
-		log.Log(true, "ran debugNumberChan <= idx where idx =", idx)
+		log.Log(CHAN, "ran debugNumberChan <= idx where idx =", idx)
 		fmt.Printf("S generateNumbers() sending %d to channel\n", idx)
 		debugNumberChan <- idx
 		// res, err := (<-r)()
@@ -90,9 +90,9 @@ func generateNumbers(total int) {
 // i equals the number of times to read values from the channel
 func printInt(i int, name string) {
 	tmp := 1
-	log.Log(true, "START printInt", name, "read debugNumberChan()")
+	log.Log(CHAN, "START printInt", name, "read debugNumberChan()")
 	for num := range debugNumberChan {
-		log.Log(true, "printInt()",name, "read", num, "from channel")
+		log.Log(CHAN, "printInt()",name, "read", num, "from channel")
 		debugWG.Done()
 		if (tmp == i) {
 			return

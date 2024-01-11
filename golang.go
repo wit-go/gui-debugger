@@ -73,7 +73,7 @@ func DebugGolangWindow(p *gui.Node) *gadgets.BasicWindow {
 		var tmp debug.GCStats
 		var out string
 		debug.ReadGCStats(&tmp)
-		log.Log(true, tmp)
+		log.Log(INFO, tmp)
 		out += fmt.Sprintln("LastGC:", tmp.LastGC, "// time.Time time of last collection")
 		out += fmt.Sprintln("NumGC:", tmp.NumGC, "// number of garbage collections")
 		out += fmt.Sprintln("PauseTotal:", tmp.PauseTotal, "// total pause for all collections")
@@ -125,7 +125,7 @@ func DebugGolangWindow(p *gui.Node) *gadgets.BasicWindow {
 	og = w.Box().NewGroup("output").Pad()
 	outputTextbox = og.NewTextbox("outputBox")
 	outputTextbox.Custom = func () {
-		log.Log(true, "custom TextBox() for golang output a =", outputTextbox.S)
+		log.Log(INFO, "custom TextBox() for golang output a =", outputTextbox.S)
 	}
 
 	return w

@@ -7,9 +7,11 @@ import (
 	"go.wit.com/log"
 )
 
-var INFO log.LogFlag
-var POLL log.LogFlag
-var BUG log.LogFlag
+var INFO *log.LogFlag
+var POLL *log.LogFlag
+var CHAN *log.LogFlag
+var WARN *log.LogFlag
+
 var argDebugger ArgsDebugger
 
 // This struct can be used with the go-arg package
@@ -25,15 +27,11 @@ func ArgDebug() bool {
 func init() {
 	arg.Register(&argDebugger)
 
-	INFO.B = false
-	INFO.Name = "INFO"
-	INFO.Subsystem = "bugger"
-	INFO.Desc = "simple debugging Info()"
-	INFO.Register()
+	full := "go.wit.com/gui/debugger"
+	short := "bugger"
 
-	POLL.B = false
-	POLL.Name = "POLL"
-	POLL.Subsystem = "bugger"
-	POLL.Desc = "watch the debugger poll things"
-	POLL.Register()
+	INFO = log.NewFlag("INFO", false, full, short, "simple debugging Info()")
+	POLL = log.NewFlag("POLL", false, full, short, "watch the debugger poll things")
+	CHAN = log.NewFlag("CHAN", true,  full, short, "chan() test code output")
+	WARN = log.NewFlag("WARN", true,  full, short, "should warn the user")
 }

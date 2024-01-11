@@ -81,12 +81,12 @@ func DebugWindow2(newB *gui.Node, title string) *gui.Node {
 	})
 
 	gr.NewButton("test conc", func () {
-		log.Log(true, "TODO: fix me")
+		log.Log(WARN, "TODO: fix me")
 		// makeConc()
 	})
 
 	gr.NewButton("List Plugins", func () {
-		log.Log(true, "TODO: fix me")
+		log.Log(WARN, "TODO: fix me")
 		/*
 		for _, aplug := range allPlugins {
 			log.Log(true, "Loaded plugin:", aplug.name, aplug.filename)
@@ -137,7 +137,7 @@ func dropdownWindow(p *gui.Node) {
 		name := dd.S
 		activeWidget = mapWindows[name]
 		setActiveWidget(activeWidget)
-		log.Log(true, "The Window was set to", name)
+		log.Log(INFO, "The Window was set to", name)
 	}
 	log.Log(INFO, "dd =", dd)
 	if (activeWidget == nil) {

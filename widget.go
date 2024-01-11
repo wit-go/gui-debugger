@@ -140,7 +140,7 @@ func debugAddWidgetButtons(n *gui.Node) {
 		a.AddText("make something for tim for qflow")
 		a.AddText("and for riscv")
 		a.Custom = func () {
-			log.Log(true, "custom dropdown() a =", a.Name, a.S)
+			log.Log(WARN, "custom dropdown() a =", a.Name, a.S)
 		}
 	})
 	n.NewButton("Combobox", func () {
@@ -148,7 +148,7 @@ func debugAddWidgetButtons(n *gui.Node) {
 		a.AddText("mirrors.wit.com")
 		a.AddText("go.wit.com")
 		a.Custom = func () {
-			log.Log(true, "custom combobox() a =", a.Name, a.S)
+			log.Log(WARN, "custom combobox() a =", a.Name, a.S)
 		}
 	})
 	n.NewButton("Grid", func () {
@@ -222,13 +222,13 @@ func debugAddWidgetButton(n *gui.Node) {
 			activeWidget.SetNext(newX, newY)
 			name = name + " (" + strconv.Itoa(newX) + "," + strconv.Itoa(newY) + ")"
 		}
-		log.Log(true, "New Name =", name)
-		log.Log(true, "New Type =", activeLabelNewType.S)
-		log.Log(true, "New X    =", newX)
-		log.Log(true, "New Y    =", newY)
-		log.Log(true, "activeWidget.NextW    =", activeWidget.NextW)
-		log.Log(true, "activeWidget.NextH    =", activeWidget.NextH)
-		log.Log(true, "Add() size (X,Y)", activeWidget.X, activeWidget.Y, "put next thing at (W,H) =", activeWidget.NextW, activeWidget.NextH)
+		log.Log(INFO, "New Name =", name)
+		log.Log(INFO, "New Type =", activeLabelNewType.S)
+		log.Log(INFO, "New X    =", newX)
+		log.Log(INFO, "New Y    =", newY)
+		log.Log(INFO, "activeWidget.NextW    =", activeWidget.NextW)
+		log.Log(INFO, "activeWidget.NextH    =", activeWidget.NextH)
+		log.Log(INFO, "Add() size (X,Y)", activeWidget.X, activeWidget.Y, "put next thing at (W,H) =", activeWidget.NextW, activeWidget.NextH)
 		activeWidget.Dump()
 
 		// activeWidget.X = newX
@@ -243,19 +243,19 @@ func debugAddWidgetButton(n *gui.Node) {
 			activeWidget.NewBox(name, newB)
 		case "Button":
 			activeWidget.NewButton(name, func () {
-				log.Log(true, "got to button", name)
+				log.Log(WARN, "got to button", name)
 			})
 		case "Checkbox":
 			a := activeWidget.NewCheckbox(name)
 			a.Custom = func () {
-				log.Log(true, "custom checkox func a=", a.B)
+				log.Log(WARN, "custom checkox func a=", a.B)
 			}
 		case "Dropdown":
 			a := activeWidget.NewDropdown(name)
 			a.AddText(name + " yay")
 			a.AddText(name + " haha")
 			a.Custom = func () {
-				log.Log(true, "WTF a=", a.B)
+				log.Log(WARN, "WTF a=", a.B)
 			}
 		case "Combobox":
 			a := activeWidget.NewCombobox(name)
